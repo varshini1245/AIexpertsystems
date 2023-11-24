@@ -1,0 +1,14 @@
+% Facts: Define genders and parent-child relationships
+gender(john, male).
+gender(jane, female).
+gender(kate, female).
+
+has_child(john, mary).
+has_child(jane, mary).
+has_child(jane, peter).
+has_child(kate, lily).
+
+% Rules: Define parent relationship based on gender and having a child
+parent(X) :-
+    gender(X, female),
+    has_child(X, _).

@@ -1,0 +1,34 @@
+% Facts defining individuals with their dates of birth
+dob(john, date(1990, 5, 15)).
+dob(emma, date(1985, 9, 22)).
+dob(lucas, date(1995, 11, 7)).
+dob(sophia, date(1980, 3, 10)).
+dob(olivia, date(2000, 7, 28)).
+
+% Predicate to retrieve the date of birth of a specific person given their name
+get_dob(Name, DOB) :- dob(Name, DOB).
+
+% Predicate to find individuals older than a certain age
+older_than_age(Age, Person, DOB) :-
+    dob(Person, Date),
+    age(Date, CurrentDate, Age),
+    DOB = Date,
+    CurrentDate @< Date.
+
+% Predicate to calculate the age
+age(date(Year, Month, Day), date(CurrentYear, CurrentMonth, CurrentDay), Age) :-
+    CurrentYear is 2023, % Current year
+    CurrentMonth is 11, % Current month
+    CurrentDay is 23, % Current day
+    Age is CurrentYear - Year - ((CurrentMonth, CurrentDay) @< (Month, Day)).
+
+% Predicate to determine the youngest person in the database
+youngest_person(Name, DOB) :-
+    dob(Name, DOB),
+    \+ (dob(_, OtherDOB), OtherDOB @< DOB).
+
+% Predicate to check if one person is older than another
+older_than(Person1, Person2) :-
+    dob(Person1, DOB1),
+    dob(Person2, DOB2),
+    DOB1 @< DOB2.

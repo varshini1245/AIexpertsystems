@@ -1,0 +1,18 @@
+% Every boy or girl is a child
+child(X) :- boy(X).
+child(X) :- girl(X).
+
+% Every child gets a doll or a train or a lump of coal
+gets(X, doll) :- child(X).
+gets(X, train) :- child(X).
+gets(X, coal) :- child(X).
+
+% No boy gets any doll
+gets(X, doll) :- boy(X), !, fail.
+
+% No child who is good gets any lump of coal
+good(jack). % Assuming Jack is good (given "Jack is a boy")
+gets(X, coal) :- child(X), good(X), !, fail.
+
+% Jack is a boy
+boy(jack).
